@@ -22,7 +22,10 @@ campus = str()
 #the Q&A on the printers page has to be made fullscreen in the browser window and then saved as full html
 # this script is then run from the same directory the html was saved in via terminal
 
-fname = "3DPrinterOS - Printers.html"
+try:
+    fname ="3DPrinterOS - Dashboard.html"
+except: 
+    fname = "3DPrinterOS - Printers.html"
 soup = BeautifulSoup(open(fname), 'html.parser') 
 out = "clipboard.txt"
 log = "log.txt"

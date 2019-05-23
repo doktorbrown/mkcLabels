@@ -1,7 +1,7 @@
 '''
 Created on Oct 12, 2018
 
-Modified on Apr 4, 2019
+Modified on May 22, 2019
 @author doktorbrown
 '''
 import os
@@ -34,16 +34,16 @@ csvLogOutput = "3D_label_Logs.csv"
 
 # extract the user info from the html and assign it to the Getters
 # 
-firstNameGetter = soup.find_all(text = re.compile("^What is your name?"))[0].next.next.next
+firstNameGetter = soup.find_all(text = re.compile("^What is your name?"))[0].next.next
 # print(firstNameGetter)
 
-lastNameGetter = soup.find_all(text = re.compile("^What is your name?"))[0].next.next.next.next.next.next.next_element
+lastNameGetter = soup.find_all(text = re.compile("^What is your name?"))[0].next.next.next.next
 # print(lastNameGetter)
 
-emailGetter = soup.find_all(text = re.compile("^Please re-enter your PSU email address."))[0].next.next.next
+emailGetter = soup.find_all(text = re.compile("^Please re-enter your PSU email address."))[0].next.next
 # print(emailGetter)
-campusGetter = soup.find_all(text = re.compile("^Campus:"))[0].next.next.next
-# print campusGetter
+campusGetter = soup.find_all(text = re.compile("^Campus:"))[0].next.next
+print campusGetter
 
 today =str(date.today())
 # print today
@@ -81,7 +81,7 @@ lineOne = (campus, '\n',
 #  
 f.writelines(lineOne)
 #   
-print lineOne
+# print lineOne
 #  
 f.close()
 # 

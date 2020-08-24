@@ -4,12 +4,18 @@ Created on Oct 12, 2018
 Modified on Jan 24,2020
 
 Super COVID Address Label Modified on Aug 18, 2020
+Additional tweaks on Aug 24, 2020
 
 This reads in a saved html file of 3dprinterOS 'Job Details' on the printers.html 
 page, and then parses the Q&A based on the custom fields. This information is 
 turned into Delivery and Shipping labels that are printed on a DYMO_LabelWriter_450_Turbo.
+print drivers should be installed and the printer added in system preferences so that
+it can be accessed via lpr.  https://www.dymo.com/en-US/labelwriter-450-turbo-label-printer
 
 It's ugly. But it works.
+
+additional references:
+    https://www.computerhope.com/unix/ulpr.htm
 
 
 
@@ -143,7 +149,7 @@ printerNumber = int(input())
 
 #does that printer exist?
 
-while printerNumber >= 31:
+while printerNumber >= 31: 
     try:
         print("Please re-enter the printer number.", printerNumber, " does not exist.")
         printerNumber = int(input())
@@ -213,8 +219,8 @@ if campusGetter =="HOME DELIVERY" or campusGetter =="WORLD CAMPUS":
     #shorter for new labels 
 
 
-    addressLabel = (firstNameGetter," ",lastNameGetter,'\n',
-    mailingAddressStreetGetter,'\n',
+    addressLabel = (firstNameGetter," ",lastNameGetter,'\n', emailGetter, printerNumber,'\n',
+    mailingAddressStreetGetter, '\n',
     mailingAddressCityGetter,"  ", mailingAddressStateGetter,'\n',
     mailingAddressZIPGetter,'\n'
     )
@@ -224,7 +230,8 @@ if campusGetter =="HOME DELIVERY" or campusGetter =="WORLD CAMPUS":
     #   
 #     print(addressLabel)
     print(" ")
-    print(firstNameGetter ," ",lastNameGetter, emailGetter)
+    print(firstNameGetter ," ",lastNameGetter)
+    print(emailGetter, printerNumber)
     print(mailingAddressStreetGetter)
     print(mailingAddressCityGetter, "  ", mailingAddressStateGetter, mailingAddressZIPGetter)
     print(" ")
@@ -232,7 +239,8 @@ if campusGetter =="HOME DELIVERY" or campusGetter =="WORLD CAMPUS":
     f.close()
     # 
     # this only works when the dymo labelwriter is installed and connected, otherwise comment out the following line
-    os.system("lpr -o landscape -P DYMO_LabelWriter_450_Turbo clipboard.txt")
+    os.system("lpr -o fit-to-page -o landscape -P DYMO_LabelWriter_450_Turbo clipboard.txt")
+#     os.system("lpr -o fit-to-page -P DYMO_LabelWriter_450_Turbo clipboard.txt")#rotated 90 degrees
     #
     print(" ") 
     print("Address Label printed.")

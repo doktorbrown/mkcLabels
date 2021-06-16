@@ -8,6 +8,8 @@ Additional tweaks on Aug 24, 2020
 
 Regex parsing and error handling of label data changed to reflect updated 3DPrinterOS interface  May 10, 2021
 
+Jun 16, 2021: fixed spacing between email and printer number in address label
+
 
 
 This reads in a saved html file of 3dprinterOS 'Job Details' on the printers.html 
@@ -103,28 +105,28 @@ campusGetter = soup.find_all(text = re.compile("^DELIVERY_CAMPUS: "))[0].next.ne
 try:
 
     mailingAddressStreetGetter = soup.find_all(text = re.compile("^Street : "))[0].next.next
-   # print(mailingAddressStreetGetter)
+    # print(mailingAddressStreetGetter)
 except: 
     mailingAddressStreetGetter =""
     pass 
 try:
    
     mailingAddressCityGetter = soup.find_all(text = re.compile("^City: "))[0].next.next
-   # print(mailingAddressCityGetter)
+    # print(mailingAddressCityGetter)
 except: 
     mailingAddressCityGetter =""
     pass  
 try:
  
     mailingAddressStateGetter = soup.find_all(text = re.compile("^State: "))[0].next.next
-   # print(mailingAddressStateGetter)
+    # print(mailingAddressStateGetter)
 except: 
     mailingAddressStateGetter =""
     pass   
 try:
 
     mailingAddressZIPGetter = soup.find_all(text = re.compile("^ZIP CODE: "))[0].next.next
-   # print(mailingAddressZIPGetter)
+    # print(mailingAddressZIPGetter)
 except: 
     mailingAddressZIPGetter =""
     pass  
@@ -260,7 +262,7 @@ if campusGetter =="HOME DELIVERY" or campusGetter =="WORLD CAMPUS":
 #     print(addressLabel)
     print(" ")
     print(firstNameGetter ," ",lastNameGetter)
-    print(emailGetter, printerNumber)
+    print(emailGetter," ","Printer:  ", printerNumber)
     print(mailingAddressStreetGetter)
     print(mailingAddressCityGetter, "  ", mailingAddressStateGetter, mailingAddressZIPGetter)
     print(" ")

@@ -8,6 +8,8 @@ Additional tweaks on Aug 24, 2020
 
 Regex parsing and error handling of label data changed to reflect updated 3DPrinterOS interface  May 10, 2021
 
+Jun 16, 2021: fixed spacing between email and printer number in address label
+
 
 
 This reads in a saved html file of 3dprinterOS 'Job Details' on the printers.html 

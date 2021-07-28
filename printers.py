@@ -10,7 +10,7 @@ Regex parsing and error handling of label data changed to reflect updated 3DPrin
 
 Jun 16, 2021: fixed spacing between email and printer number in address label
 
-
+Jul 28, 2021: ANSI colors for preview labels
 
 This reads in a saved html file of 3dprinterOS 'Job Details' on the printers.html 
 page, and then parses the Q&A based on the custom fields. This information is 
@@ -155,6 +155,8 @@ if campusGetter =="UNIVERSITY PARK":
     campus = " "
 else:
     campus = campusGetter
+    
+print("\033[36;1m")
 print(" ")          
 # print to screen as verification
 print(campus)
@@ -164,6 +166,7 @@ print(emailGetter)
 
 
 #confirm preview and enter printer number
+print("\033[0m")
 print(" ")
 print("Please enter the printer number you are sending this to, and press return if the preview is correct.")
 print("Don't forget to add this to the Notes in the Job Details window before you close it.")
@@ -260,12 +263,14 @@ if campusGetter =="HOME DELIVERY" or campusGetter =="WORLD CAMPUS":
     f.writelines(addressLabel)
     #   
 #     print(addressLabel)
+    print("\033[36;1m")
     print(" ")
     print(firstNameGetter ," ",lastNameGetter)
     print(emailGetter," ","Printer:  ", printerNumber)
     print(mailingAddressStreetGetter)
     print(mailingAddressCityGetter, "  ", mailingAddressStateGetter, mailingAddressZIPGetter)
     print(" ")
+    print("\033[0m")
     #  
     f.close()
     # 
@@ -273,6 +278,7 @@ if campusGetter =="HOME DELIVERY" or campusGetter =="WORLD CAMPUS":
     os.system("lpr -o fit-to-page -o landscape -P DYMO_LabelWriter_450_Turbo clipboard.txt")
 #     os.system("lpr -o fit-to-page -P DYMO_LabelWriter_450_Turbo clipboard.txt")#rotated 90 degrees
     #
+    # print("\033[0m")
     print(" ") 
     print("Address Label printed.")
 

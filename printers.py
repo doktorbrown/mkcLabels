@@ -12,6 +12,10 @@ Jun 16, 2021: fixed spacing between email and printer number in address label
 
 Jul 28, 2021: ANSI colors for preview labels
 
+Jul 29, 2021: Changed printer model from 450 Turbo to 450 and removed delays to speed up printing
+
+
+
 This reads in a saved html file of 3dprinterOS 'Job Details' on the printers.html 
 page, and then parses the Q&A based on the custom fields. This information is 
 turned into Delivery and Shipping labels that are printed on a DYMO_LabelWriter_450_Turbo.
@@ -50,11 +54,11 @@ from time import strftime
 
 #delayed start to allow html download to complete
 
-time.sleep(1)
+# time.sleep(1)
 
 print("generating preview")
 
-time.sleep(3)
+# time.sleep(3)
 
  
 
@@ -233,7 +237,7 @@ try:
     # 
     try:
         # this only works when the dymo labelwriter is installed and connected, otherwise comment out the following line
-        os.system("lpr -o landscape -P DYMO_LabelWriter_450_Turbo clipboard.txt")
+        os.system("lpr -o landscape -P DYMO_LabelWriter_450 clipboard.txt")
         print("Delivery Label printed.")
     except:
         print("No printer connected")
@@ -243,7 +247,7 @@ except:
     pass
 
 if campusGetter =="HOME DELIVERY" or campusGetter =="WORLD CAMPUS":
-    time.sleep(1)
+    # time.sleep(1)
     print(" ")
     print("Printing Address Label:  ")
     # send to clipboard
@@ -275,7 +279,7 @@ if campusGetter =="HOME DELIVERY" or campusGetter =="WORLD CAMPUS":
     f.close()
     # 
     # this only works when the dymo labelwriter is installed and connected, otherwise comment out the following line
-    os.system("lpr -o fit-to-page -o landscape -P DYMO_LabelWriter_450_Turbo clipboard.txt")
+    os.system("lpr -o fit-to-page -o landscape -P DYMO_LabelWriter_450 clipboard.txt")
 #     os.system("lpr -o fit-to-page -P DYMO_LabelWriter_450_Turbo clipboard.txt")#rotated 90 degrees
     #
     # print("\033[0m")

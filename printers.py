@@ -14,7 +14,7 @@ Jul 28, 2021: ANSI colors for preview labels
 
 Jul 29, 2021: Changed printer model from 450 Turbo to 450 and removed delays to speed up printing
 
-
+Aug 22, 2021: modified somehow that I didn't document?
 
 This reads in a saved html file of 3dprinterOS 'Job Details' on the printers.html 
 page, and then parses the Q&A based on the custom fields. This information is 
@@ -25,7 +25,7 @@ it can be accessed via lpr.  https://www.dymo.com/en-US/labelwriter-450-turbo-la
 It's ugly. But it works.
 
 additional references:
-    https://www.computerhope.com/unix/ulpr.htm
+    https://www.computerhope.com/unix/ulpr.htm 
 
 
 

@@ -16,6 +16,8 @@ Jul 29, 2021: Changed printer model from 450 Turbo to 450 and removed delays to 
 
 Aug 22, 2021: modified somehow that I didn't document?
 
+Feb 2, 2023: fixed world campus issue where WORLD CAMPUS would display when Delivery Method was set to Self-pickup
+
 This reads in a saved html file of 3dprinterOS 'Job Details' on the printers.html 
 page, and then parses the Q&A based on the custom fields. This information is 
 turned into Delivery and Shipping labels that are printed on a DYMO_LabelWriter_450_Turbo.
@@ -25,7 +27,7 @@ it can be accessed via lpr.  https://www.dymo.com/en-US/labelwriter-450-turbo-la
 It's ugly. But it works.
 
 additional references:
-    https://www.computerhope.com/unix/ulpr.htm 
+    https://www.computerhope.com/unix/ulpr.htm  
 
 
 
@@ -68,7 +70,7 @@ try:
     fname ="3DPrinterOS - Printers.html"
     
 except: 
-    fname = "3DPrinterOS - Printers.html"
+    fname = "3DPrinterOS - Printers.html" 
     
     
 #prep input and output files
@@ -91,7 +93,7 @@ print(" ")
 # debug print statements could be turned off, but they provide more information about what is being processed
 
 deliveryMethodGetter = soup.find_all(text = re.compile("^Delivery Method?"))[0].next.next
-#print(deliveryMethodGetter)
+print(deliveryMethodGetter)
 
 # 
 firstNameGetter = soup.find_all(text = re.compile("^FIRST_NAME: "))[0].next.next
@@ -155,7 +157,9 @@ print(today, hour)
 # 
 # don't display campus if UP
 
-if campusGetter =="UNIVERSITY PARK":
+if campusGetter =="UNIVERSITY PARK": 
+    campus = " "
+elif campusGetter =="WORLD CAMPUS" and deliveryMethodGetter == "Self-Pickup at University Park-- Media Commons Service Desk outside W140 Pattee": 
     campus = " "
 else:
     campus = campusGetter
@@ -204,7 +208,7 @@ print(" ")
 
 
 #initial Delivery print labels go here. this should be turned into a function to simplify things.
-#If HOME DELIVERY or WORLD CAMPUS are selected then a second label will print.
+#If HOME DELIVERY and WORLD CAMPUS are selected then a second label will print.
 #and Delivery Method is home delivery
 
 
@@ -246,7 +250,7 @@ except:
     print("No printer connected")
     pass
 
-if campusGetter =="HOME DELIVERY" or campusGetter =="WORLD CAMPUS":
+if campusGetter =="HOME DELIVERY" and campusGetter =="WORLD CAMPUS":
     # time.sleep(1)
     print(" ")
     print("Printing Address Label:  ")

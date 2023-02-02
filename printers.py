@@ -208,8 +208,8 @@ print(" ")
 
 
 #initial Delivery print labels go here. this should be turned into a function to simplify things.
-#If HOME DELIVERY and WORLD CAMPUS are selected then a second label will print.
-#and Delivery Method is home delivery
+#If WORLD CAMPUS are selected then a second label will print.
+#and Delivery Method is "World Campus(This may take 7-10 days. Please make sure that World Campus is selected above under Campus.  This is not available for State College or University Park Addresses)"
 
 
 
@@ -247,10 +247,10 @@ try:
         print("No printer connected")
     pass
 except:
-    print("No printer connected")
+    print("No printer connected") 
     pass
 
-if campusGetter =="HOME DELIVERY" and campusGetter =="WORLD CAMPUS":
+if campusGetter =="WORLD CAMPUS" and deliveryMethodGetter =="World Campus(This may take 7-10 days. Please make sure that World Campus is selected above under Campus.  This is not available for State College or University Park Addresses)":
     # time.sleep(1)
     print(" ")
     print("Printing Address Label:  ")

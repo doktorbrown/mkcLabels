@@ -18,6 +18,9 @@ Aug 22, 2021: modified somehow that I didn't document?
 
 Feb 2, 2023: fixed world campus issue where WORLD CAMPUS would display when Delivery Method was set to Self-pickup
 
+Jun 30, 2023: changed regex to use the "string" argument is new in Beautiful Soup 4.4.0. 
+                In earlier versions it was called "text" 
+                
 This reads in a saved html file of 3dprinterOS 'Job Details' on the printers.html 
 page, and then parses the Q&A based on the custom fields. This information is 
 turned into Delivery and Shipping labels that are printed on a DYMO_LabelWriter_450_Turbo.
@@ -86,59 +89,59 @@ print(" ")
 # extract the user info from the html and assign it to the Getters
 
 #not currently possible to extract Job ID (8.18.2020) which could be added to the labels
-# jobIDGetter = soup.find_all(text = re.compile("^StatusText"))[0].next
+# jobIDGetter = soup.find_all(string = re.compile("^StatusText"))[0].next
 # print("jobIDGetter:  ",jobIDGetter)
 
 
 # debug print statements could be turned off, but they provide more information about what is being processed
 
-deliveryMethodGetter = soup.find_all(text = re.compile("^Delivery Method?"))[0].next.next
+deliveryMethodGetter = soup.find_all(string = re.compile("^Delivery Method?"))[0].next.next
 print(deliveryMethodGetter)
 
 # 
-firstNameGetter = soup.find_all(text = re.compile("^FIRST_NAME: "))[0].next.next
+firstNameGetter = soup.find_all(string = re.compile("^FIRST_NAME: "))[0].next.next
 #print(firstNameGetter)
 
-lastNameGetter = soup.find_all(text = re.compile("^LAST_NAME: "))[0].next.next
+lastNameGetter = soup.find_all(string = re.compile("^LAST_NAME: "))[0].next.next
 #print(lastNameGetter)
 
-emailGetter = soup.find_all(text = re.compile("^EMAIL_VERIFICATION: "))[0].next.next
+emailGetter = soup.find_all(string = re.compile("^EMAIL_VERIFICATION: "))[0].next.next
 #print(emailGetter)
-campusGetter = soup.find_all(text = re.compile("^DELIVERY_CAMPUS: "))[0].next.next
+campusGetter = soup.find_all(string = re.compile("^DELIVERY_CAMPUS: "))[0].next.next
 #print(campusGetter)
 
 
 try:
 
-    mailingAddressStreetGetter = soup.find_all(text = re.compile("^Street : "))[0].next.next
+    mailingAddressStreetGetter = soup.find_all(string = re.compile("^Street : "))[0].next.next
     # print(mailingAddressStreetGetter)
 except: 
     mailingAddressStreetGetter =""
     pass 
 try:
    
-    mailingAddressCityGetter = soup.find_all(text = re.compile("^City: "))[0].next.next
+    mailingAddressCityGetter = soup.find_all(string = re.compile("^City: "))[0].next.next
     # print(mailingAddressCityGetter)
 except: 
     mailingAddressCityGetter =""
     pass  
 try:
  
-    mailingAddressStateGetter = soup.find_all(text = re.compile("^State: "))[0].next.next
+    mailingAddressStateGetter = soup.find_all(string = re.compile("^State: "))[0].next.next
     # print(mailingAddressStateGetter)
 except: 
     mailingAddressStateGetter =""
     pass   
 try:
 
-    mailingAddressZIPGetter = soup.find_all(text = re.compile("^ZIP CODE: "))[0].next.next
+    mailingAddressZIPGetter = soup.find_all(string = re.compile("^ZIP CODE: "))[0].next.next
     # print(mailingAddressZIPGetter)
 except: 
     mailingAddressZIPGetter =""
     pass  
 try:
  
-    classGetter = soup.find_all(text = re.compile("^Which class is this for?: "))[0].next.next
+    classGetter = soup.find_all(string = re.compile("^Which class is this for?: "))[0].next.next
     # print(classGetter)
 except: 
     classGetter = ""

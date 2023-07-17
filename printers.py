@@ -20,7 +20,7 @@ Feb 2, 2023: fixed world campus issue where WORLD CAMPUS would display when Deli
 
 Jun 30, 2023: changed regex to use the "string" argument is new in Beautiful Soup 4.4.0. 
                 In earlier versions it was called "text" 
-                
+Jul 17, 2023: WORLD CAMPUS address labels were not printing due to an extra space in front of "WORLD CAMPUS                
 This reads in a saved html file of 3dprinterOS 'Job Details' on the printers.html 
 page, and then parses the Q&A based on the custom fields. This information is 
 turned into Delivery and Shipping labels that are printed on a DYMO_LabelWriter_450_Turbo.
@@ -34,7 +34,7 @@ additional references:
 
 
 
-@author doktorbrown
+@author doktorbrown 
 '''
 import os 
 import re
@@ -43,6 +43,7 @@ from datetime import date
 import csv
 from bs4 import BeautifulSoup 
 from time import strftime
+# from addresslabels import deliveryMethodGetter
 #installation at http://www.crummy.com/software/BeautifulSoup/     $ pip install beautifulsoup4
 
 
@@ -108,7 +109,8 @@ lastNameGetter = soup.find_all(string = re.compile("^LAST_NAME: "))[0].next.next
 emailGetter = soup.find_all(string = re.compile("^EMAIL_VERIFICATION: "))[0].next.next
 #print(emailGetter)
 campusGetter = soup.find_all(string = re.compile("^DELIVERY_CAMPUS: "))[0].next.next
-#print(campusGetter)
+print(campusGetter)
+print("that was the campus")
 
 
 try:
@@ -166,6 +168,7 @@ elif campusGetter =="WORLD CAMPUS" and deliveryMethodGetter == "Self-Pickup at U
     campus = " "
 else:
     campus = campusGetter
+    
     
 print("\033[36;1m")
 print(" ")          
@@ -233,6 +236,8 @@ addressLabel = (firstNameGetter," ",lastNameGetter,'\n',
                 mailingAddressCityGetter,"  ", mailingAddressStateGetter,'\n',
                 mailingAddressZIPGetter,'\n'
                 )
+print("testprint:  ",addressLabel)
+
 #  
 # 
 try: 
@@ -253,7 +258,19 @@ except:
     print("No printer connected") 
     pass
 
-if campusGetter =="WORLD CAMPUS" and deliveryMethodGetter =="World Campus(This may take 7-10 days. Please make sure that World Campus is selected above under Campus.  This is not available for State College or University Park Addresses)":
+
+# print("debug WORLD CAMPUS address label not printing here")
+# print(campusGetter)
+# if campusGetter =="WORLD CAMPUS":
+#     print("TRUE")
+# print(deliveryMethodGetter) 
+# if deliveryMethodGetter ==" World Campus(This may take 7-10 days. Please make sure that World Campus is selected above under Campus.  This is not available for State College or University Park Addresses)":
+#     print("TRUE")
+#
+# print('wtf?')
+
+
+if campusGetter =="WORLD CAMPUS" and deliveryMethodGetter ==" World Campus(This may take 7-10 days. Please make sure that World Campus is selected above under Campus.  This is not available for State College or University Park Addresses)":
     # time.sleep(1)
     print(" ")
     print("Printing Address Label:  ")
